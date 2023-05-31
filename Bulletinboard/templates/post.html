@@ -1,0 +1,89 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'default.html' %}
+
+{% load embed_video_tags %}
+ 
+<!-- Название у нас будет proudcts -->
+{% block title %}
+post
+{% endblock title %}
+ 
+<!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
+{% block content %}
+<h1>Заголовок: {{ post.title}}</h1>
+Дата публикации: {{ post.datepost|date:'d M Y h:i'}}
+Автор: {{ post.author }}
+Текст: {{ post.textpost}}
+{% if post.image %}
+<p><img src="http://127.0.0.1:8000/media/{{ post.image }}" width="100" height="100"></p>
+{% endif %}
+{% if post.video %}
+{% video post.video 'tiny' %}
+{% endif %}
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

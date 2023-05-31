@@ -1,0 +1,113 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'default.html' %}
+ 
+<!-- Название у нас будет proudcts -->
+{% block title %}
+reply
+{% endblock title %}
+ 
+<!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
+{% block content %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                    <h3><a href="{% url 'myacceptreply' %}">My Accept Reply</a></h3>
+                    <h2 class="post-title">Фильтр по категориям</h2>
+                    <a href="{% url 'replyfilter' 'All' %}">All</a>
+                    {% for categoryname in category %}
+                    <a href="{% url 'replyfilter' categoryname.categoryname %}">{{ categoryname }}</a>
+                    {% endfor %}
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        </div>
+    </div>
+</div>
+{% for repl in reply %}
+{% if repl.replyto.author == user %}
+{% for category in repl.replyto.categorypost.all %}
+{% if category.categoryname == filter and repl.isaccepted == False %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                    <h2 class="post-title">Post: {{ repl.replyto }}</h2>
+                <p>Текст: {{ repl.textreply }}</p>
+                <p class="post-meta">
+                    Send by {{ repl.replyfrom }} in category {% for category in repl.replyto.categorypost.all %}{{ category }}{% endfor %}
+                    <a href="{% url 'add_acceptreply' repl.id %}">Accept Reply</a>
+                    <a href="{% url 'reply_delete' repl.id %}">Delete Reply</a>
+                    <a href="#!"></a>
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        </div>
+    </div>
+</div>
+{% else %}
+{% if filter == "All" or filter == None %}
+{% if not repl.isaccepted == True %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                    <h2 class="post-title">Post: {{ repl.replyto }}</h2>
+                <p>Текст: {{ repl.textreply }}</p>
+                <p class="post-meta">
+                    Send by {{ repl.replyfrom }} in category {% for category in repl.replyto.categorypost.all %}{{ category }}{% endfor %}
+                    <a href="{% url 'add_acceptreply' repl.id %}">Accept Reply</a>
+                    <a href="{% url 'reply_delete' repl.id %}">Delete Reply</a>
+                    <a href="#!"></a>
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

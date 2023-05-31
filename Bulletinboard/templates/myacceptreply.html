@@ -1,0 +1,102 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'default.html' %}
+ 
+<!-- Название у нас будет proudcts -->
+{% block title %}
+accept reply
+{% endblock title %}
+ 
+<!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
+{% block content %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                    <h2 class="post-title">My Accept Reply</h2>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        </div>
+    </div>
+</div>
+{% for repl in acceptreply %}
+{% if repl.replies.replyto.author == user %}
+{% for category in repl.replies.replyto.categorypost.all %}
+{% if category.categoryname == filter %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                    <h2 class="post-title">Post: {{ repl.replies.replyto }}</h2>
+                <p>Текст: {{ repl.replies.textreply }}</p>
+                <p class="post-meta">
+                    Send by {{ repl.replies.replyfrom }} in category {% for category in repl.replies.replyto.categorypost.all %}{{ category }}{% endfor %}
+                    <a href="{% url 'reply_delete' repl.replies.id %}">Delete Reply</a>
+                    <a href="#!"></a>
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        </div>
+    </div>
+</div>
+{% elif filter == "All" or filter == None %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                    <h2 class="post-title">Post: {{ repl.replies.replyto }}</h2>
+                <p>Текст: {{ repl.replies.textreply }}</p>
+                <p class="post-meta">
+                    Send by {{ repl.replies.replyfrom }} in category {% for category in repl.replies.replyto.categorypost.all %}{{ category }}{% endfor %}
+                    <a href="{% url 'reply_delete' repl.replies.id %}">Delete Reply</a>
+                    <a href="#!"></a>
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

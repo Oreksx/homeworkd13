@@ -1,0 +1,81 @@
+{% extends 'default.html' %}
+ 
+<!-- Название у нас будет proudcts -->
+{% block title %}
+reply
+{% endblock title %}
+ 
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<h2>Вы действительно хотите удалить данный отклик?</h2>
+<table>
+    <thead>
+        <th>
+            Заголовок
+        </th>
+        <th>
+            Текст
+        </th>
+        <th>
+            Автор
+        </th>
+    </thead>
+    <tr>
+        <td>
+            {{ reply.replyto }}
+        </td>
+        <td>
+            {{ reply.textreply }}
+        </td>
+        <td>
+            {{ reply.replyfrom }}
+        </td>
+    </tr>
+</table>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить">
+</form>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
